@@ -17,7 +17,7 @@ func (l *LinkedList) isEmpty() bool {
 	return l.len == 0
 }
 
-func (l *LinkedList) insert(val int) Node {
+func (l *LinkedList) insertToEnd(val int) Node {
 	n := Node{}
 	n.value = val
 
@@ -36,14 +36,30 @@ func (l *LinkedList) insert(val int) Node {
 		currentHead = currentHead.next
 	}
 	return n
+} 
+
+func (l *LinkedList) insertToFront(val int) {
+	n := Node{}
+	n.value = val
+	if l.len == 0 {
+		l.head = &n
+		l.len++
+		return
+	}
+	temp := l.head
+	l.head = &n
+	l.head.next = temp
+	l.len++
+	return
 }
 
 func main()  {
 	list := LinkedList{}
 	fmt.Println(list.isEmpty())
 	fmt.Println(list)
-	list.insert(5)
-	list.insert(6)
+	list.insertToEnd(5)
+	list.insertToFront(2)
+	list.insertToEnd(6)
 	fmt.Println(list)
 	fmt.Println(list.isEmpty())
 }
